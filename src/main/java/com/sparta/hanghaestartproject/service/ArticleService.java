@@ -5,6 +5,9 @@ import com.sparta.hanghaestartproject.dto.ArticleResponseDto;
 import com.sparta.hanghaestartproject.entity.Article;
 import com.sparta.hanghaestartproject.repository.ArticleRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,8 +21,11 @@ public class ArticleService {
      private final ArticleRepository articleRepository;
      
      @Transactional (readOnly = true)
-     public List<ArticleResponseDto> getArticles() {
-          return articleRepository.findAllByOrderByCreatedAtDesc().stream()
+     public List<ArticleResponseDto> getArticles(Pageable pageable) {
+//          Page<Article> temp = articleRepository.findAllByOrderByCreatedAtDesc(pageable);
+//          System.out.println(">>>>>>>>>>"+temp.getTotalPages());
+//          return articleRepository.findAllByOrderByCreatedAtDesc(pageable).getContent().stream()
+          return articleRepository.findAllByOrderByCreatedAtDesc(pageable).stream()
                .map(ArticleResponseDto::new)
                .collect(Collectors.toList());
      }

@@ -6,11 +6,10 @@ import com.sparta.hanghaestartproject.dto.ArticleRequestDto;
 import com.sparta.hanghaestartproject.dto.ArticleResponseDto;
 import com.sparta.hanghaestartproject.service.ArticleService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,8 +18,8 @@ public class ArticleController {
      private final ArticleService articleService;
      
      @GetMapping("/api/articles") // 전체 게시글 목록 조회 API
-     public List<ArticleResponseDto> getArticles(){
-          return articleService.getArticles();
+     public List<ArticleResponseDto> getArticles(Pageable pageable){
+          return articleService.getArticles(pageable);
      }
      
      @PostMapping("/api/article") // 게시글 작성 API

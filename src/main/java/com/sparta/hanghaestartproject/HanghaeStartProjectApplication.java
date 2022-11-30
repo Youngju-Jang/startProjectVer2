@@ -38,7 +38,6 @@ public class HanghaeStartProjectApplication {
                });
                List<Article> courses = list.stream().map(Article::new).collect(Collectors.toCollection(ArrayList::new));
                articleRepository.saveAll(courses);
-               System.out.println(">>>>>>>>>>>save end");
           };
      }
 }
