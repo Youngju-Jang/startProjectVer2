@@ -1,5 +1,6 @@
 package com.sparta.hanghaestartproject.service;
 
+import com.sparta.hanghaestartproject.CustomPage;
 import com.sparta.hanghaestartproject.dto.ArticleRequestDto;
 import com.sparta.hanghaestartproject.dto.ArticleResponseDto;
 import com.sparta.hanghaestartproject.entity.Article;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,10 +24,11 @@ public class ArticleService {
      
      @Transactional (readOnly = true)
      public List<ArticleResponseDto> getArticles(Pageable pageable) {
-//          Page<Article> temp = articleRepository.findAllByOrderByCreatedAtDesc(pageable);
-//          System.out.println(">>>>>>>>>>"+temp.getTotalPages());
-//          return articleRepository.findAllByOrderByCreatedAtDesc(pageable).getContent().stream()
-          return articleRepository.findAllByOrderByCreatedAtDesc(pageable).stream()
+          Page<Article> page = articleRepository.findAllByOrderByCreatedAtDesc(pageable);
+          CustomPage<Article> cusPage = new CustomPage<>(page.getContent(), pageable, page.getTotalPages());
+          System.out.println(">>>>>>>>>>>>>>>"+cusPage.toString());
+          
+          return articleRepository.findAllByOrderByCreatedAtDesc(pageable).getContent().stream()
                .map(ArticleResponseDto::new)
                .collect(Collectors.toList());
      }

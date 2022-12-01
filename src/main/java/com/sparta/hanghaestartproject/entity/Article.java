@@ -3,10 +3,12 @@ package com.sparta.hanghaestartproject.entity;
 import com.sparta.hanghaestartproject.dto.ArticleRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Getter
+@Setter
 @Entity
 @NoArgsConstructor
 public class Article extends Timestamped{

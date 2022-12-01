@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ArticleRepository extends JpaRepository<Article, Long> {
-     @Query ("from Article")
-//     Page<Article> findAllByOrderByCreatedAtDesc(Pageable pageable);
-     List<Article> findAllByOrderByCreatedAtDesc(Pageable pageable);
+     @Query ("select a from Article a order by a.createdAt desc ")
+     Page<Article> findAllByOrderByCreatedAtDesc(Pageable pageable);
+//     List<Article> findAllByOrderByCreatedAtDesc(Pageable pageable);
      Optional<Article> findByIdAndPassword(Long id, String password);
      Boolean existsByIdAndPassword(Long id, String password);
 }
